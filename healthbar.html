@@ -1,0 +1,152 @@
+<!doctype html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health-bar</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  </head>
+  <!-- NAME -->
+  <div class="box" id="namebox" style="width: 400px;" >
+    <div> What is your name? </div>
+    <div style="display: flex;">
+    <input class="input" type="text" placeholder="Enter your name" id="typename">
+    <button class="button" onclick="enter()">Enter</button></div>
+    <div id="warning" style="margin-top: 10px;"></div>
+  </div>
+  <!-- AGE -->
+  <div class="box" id="agebox" style="width: 400px;display: none ;" >
+    <div> How old are you? </div>
+    <div style="display: flex;">
+    <input class="input" id="typeage" type="text" placeholder="Enter your age">
+    <button class="button" onclick="ageEnter()">Enter</button></div>
+    <div id="ageWarning"  style="margin-top: 10px;"></div>
+  </div>
+  <!-- GAME -->
+    <div class="box" id="box2" style="width: 650px;display: none;">
+      <div class="gamename" id="gamename" style="margin-bottom: 10px"> </div>
+      <progress
+        id="progress"
+        class="progress is-success"
+        value="100"
+        max="100"
+      ></progress>
+      <div style="display: flex; justify-content: space-around">
+        <button class="button is-danger is-outlined" onclick="takeDamage()">
+          ⚔️Attack
+        </button>
+        <img
+          id="attackImage"
+          src="Mortal Kombat Mk Sticker by Leroy Patterson.gif"
+          width="100px"
+          style="display: none"
+        />
+        <img
+          id="healImage"
+          src="Mortal Kombat Mk Sticker by Leroy Patterson 2.gif"
+          width="100px"
+          style="display: none"
+        />
+        <button class="button is-warning is-outlined" onclick="HealHero()">
+          ❤️‍🩹Heal
+        </button>
+      </div>
+    </div>
+    <!-- JAVASCRIPT -->
+    <script>
+      function enter() {
+        const agebox2 = document.getElementById("agebox");
+         const type =document.getElementById("typename");
+         const type2 = type.value;
+         const warning =document.getElementById("warning")
+         
+        if (type2=="") {
+          agebox2.style.display = "none"
+          warning.textContent="You must enter your name to start the game!";
+         }
+          else {
+            agebox2.style.display="block"
+            warning.style.display="none"
+            }
+      }
+      function ageEnter() {
+        const name =document.getElementById("gamename");
+        const typeage =document.getElementById("typeage");
+        const typeage_El= typeage.value;
+        const ageWarning = document.getElementById("ageWarning");
+        const gamebox= document.getElementById("box2");
+        const namebox=document.getElementById("namebox");
+        let age = 8
+        
+        if (typeage_El=="") {
+          ageWarning.textContent="You must enter your age to start the game!"
+          gamebox.style.display="none"
+        } else if (typeage_El< age) {
+          ageWarning.textContent="To play the game, you must be 8 or older!"
+          gamebox.style.display="none"
+        }
+          else { 
+         gamebox.style.display="block"
+        const agebox2 = document.getElementById("agebox");
+        agebox2.style.display="none"
+        gamebox.style.display="block"
+        namebox.style.display="none"
+        const type =document.getElementById("typename");
+        const type2 = type.value;
+        name.textContent = "PLAYER: "+ type2
+
+        }
+      }
+      let apg = 100;
+      function takeDamage() {
+        apg = apg - 10;
+        const bar = document.getElementById("progress");
+        const Aimage = document.getElementById("attackImage");
+        Aimage.style.display = "block";
+        const Himage = document.getElementById("healImage");
+        Himage.style.display = "none";
+        bar.value = apg;
+
+        if (apg <= 50) {
+          bar.className = "progress is-warning";
+        } if (apg <= 20) {
+          bar.className = "progress is-danger";
+        }
+        if (apg < 0) {
+          alert("YOU LOST!");
+          bar.value = 100;
+          bar.className = "progress is-success";
+        }
+      }
+
+      function HealHero() {
+        apg = apg + 10;
+        const bar = document.getElementById("progress");
+        const Aimage = document.getElementById("attackImage");
+        Aimage.style.display = "none";
+        const Himage = document.getElementById("healImage");
+        Himage.style.display = "block";
+        bar.value = apg;
+        if (apg > 50) {
+          bar.className = "progress is-success";
+        }
+        if (apg <= 50) {
+          bar.className = "progress is-warning";
+        }
+        if (apg <= 20) {
+          bar.className = "progress is-danger";
+        }
+      }
+    </script>
+  </body>
+</html>
